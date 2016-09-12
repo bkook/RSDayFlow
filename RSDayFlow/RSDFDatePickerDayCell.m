@@ -121,14 +121,8 @@ CGFloat roundOnBase(CGFloat x, CGFloat base) {
     if (!_textLabel) {
         _textLabel = [[UILabel alloc] initWithFrame:self.bounds];
         _textLabel.backgroundColor = [UIColor clearColor];
-        _textLabel.font = [UIFont systemFontOfSize:9];
-        _textLabel.minimumScaleFactor = 0.8;
-        _textLabel.adjustsFontSizeToFitWidth = YES;
-        _textLabel.numberOfLines = 2;
         
-        if ([_textLabel respondsToSelector:@selector(setAllowsDefaultTighteningForTruncation:)]) {
-            _textLabel.allowsDefaultTighteningForTruncation = YES;
-        }
+        [self configureTextLabel:_textLabel];
     }
     
     return _textLabel;
@@ -159,7 +153,7 @@ CGFloat roundOnBase(CGFloat x, CGFloat base) {
     
     return CGRectMake(horizontalMargin,
                       CGRectGetHeight(self.bounds) - textSize.height - verticalMargin,
-                      textSize.width,
+                      maxLabelSize.width,
                       textSize.height);
 }
 
@@ -538,6 +532,10 @@ CGFloat roundOnBase(CGFloat x, CGFloat base) {
         dividerImage = [self rectImageWithKey:dividerImageKey frame:self.dividerImageView.frame color:dividerImageColor];
     }
     return dividerImage;
+}
+
+- (void)configureTextLabel:(UILabel *)label
+{
 }
 
 @end

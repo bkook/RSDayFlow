@@ -268,6 +268,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (CGRect)selectedImageViewFrame;
 
+- (void)configureTextLabel:(UILabel *)label;
+
 @end
 
 NS_ASSUME_NONNULL_END
