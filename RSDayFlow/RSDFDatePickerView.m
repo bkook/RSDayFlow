@@ -687,6 +687,20 @@ static NSString * const RSDFDatePickerViewDayCellIdentifier = @"RSDFDatePickerVi
             }
         }
         
+        if ([self.dataSource respondsToSelector:@selector(datePickerView:textForDate:)]) {
+            
+            NSString *text = [self.dataSource datePickerView:self textForDate:cellDate];
+            
+            if (![text isEqual:cell.textLabel.text]) {
+                cell.textLabel.text = text;
+                [cell setNeedsLayout];
+            }
+        }
+        
+        if ([self.dataSource respondsToSelector:@selector(datePickerView:textColorForDate:)]) {
+            cell.textLabel.textColor = [self.dataSource datePickerView:self textColorForDate:cellDate];
+        }
+
         NSComparisonResult result = [_today compare:cellDate];
         switch (result) {
             case NSOrderedSame: {

@@ -285,6 +285,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable UIImage *)datePickerView:(RSDFDatePickerView *)view markImageForDate:(NSDate *)date;
 
+/**
+ */
+- (nullable NSString *)datePickerView:(RSDFDatePickerView *)view textForDate:(NSDate *)date;
+
+- (UIColor *)datePickerView:(RSDFDatePickerView *)view textColorForDate:(NSDate *)date;
+
 @end
 
 NS_ASSUME_NONNULL_END

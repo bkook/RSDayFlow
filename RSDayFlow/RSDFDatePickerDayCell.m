@@ -44,6 +44,7 @@ CGFloat roundOnBase(CGFloat x, CGFloat base) {
 @implementation RSDFDatePickerDayCell
 
 @synthesize dateLabel = _dateLabel;
+@synthesize textLabel = _textLabel;
 @synthesize selectedDayImageView = _selectedDayImageView;
 @synthesize overlayImageView = _overlayImageView;
 @synthesize markImage = _markImage;
@@ -80,6 +81,7 @@ CGFloat roundOnBase(CGFloat x, CGFloat base) {
     [self addSubview:self.markImageView];
     [self addSubview:self.dividerImageView];
     [self addSubview:self.dateLabel];
+    [self addSubview:self.textLabel];
     
     [self updateSubviews];
 }
@@ -89,6 +91,7 @@ CGFloat roundOnBase(CGFloat x, CGFloat base) {
     [super layoutSubviews];
     
     self.dateLabel.frame = [self selectedImageViewFrame];
+    self.textLabel.frame = [self textLabelFrame];
     self.selectedDayImageView.frame = [self selectedImageViewFrame];
     self.overlayImageView.frame = [self selectedImageViewFrame];
     self.markImageView.frame = [self markImageViewFrame];
@@ -111,6 +114,51 @@ CGFloat roundOnBase(CGFloat x, CGFloat base) {
         _dateLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _dateLabel;
+}
+
+- (UILabel *)textLabel
+{
+    if (!_textLabel) {
+        _textLabel = [[UILabel alloc] initWithFrame:self.bounds];
+        _textLabel.backgroundColor = [UIColor clearColor];
+        _textLabel.font = [UIFont systemFontOfSize:9];
+        _textLabel.minimumScaleFactor = 0.8;
+        _textLabel.adjustsFontSizeToFitWidth = YES;
+        _textLabel.numberOfLines = 2;
+        
+        if ([_textLabel respondsToSelector:@selector(setAllowsDefaultTighteningForTruncation:)]) {
+            _textLabel.allowsDefaultTighteningForTruncation = YES;
+        }
+    }
+    
+    return _textLabel;
+}
+
+- (CGRect)textLabelFrame
+{
+    static const CGFloat horizontalMargin = 2;
+    CGSize maxLabelSize = CGSizeMake(CGRectGetWidth(self.bounds) - horizontalMargin * 2, CGRectGetHeight(self.bounds));
+    
+//    NSDictionary *attrs = @{ NSFontAttributeName: _textLabel.font };
+//    
+//    NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
+//    context.minimumScaleFactor = _textLabel.minimumScaleFactor;
+//    
+//    CGRect textRect = [_textLabel.text boundingRectWithSize:maxLabelSize
+//                                                    options:NSStringDrawingUsesLineFragmentOrigin
+//                                                 attributes:attrs
+//                                                    context:context];
+//    
+//    CGSize textSize = textRect.size;
+    
+    CGSize textSize = [_textLabel sizeThatFits:maxLabelSize];
+    
+    textSize.height = MIN(textSize.height, CGRectGetHeight(self.bounds) - 35);
+    
+    return CGRectMake(horizontalMargin,
+                      CGRectGetHeight(self.bounds) - textSize.height,
+                      textSize.width,
+                      textSize.height);
 }
 
 - (UIImageView *)dividerImageView
