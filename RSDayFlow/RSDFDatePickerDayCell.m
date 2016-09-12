@@ -137,6 +137,8 @@ CGFloat roundOnBase(CGFloat x, CGFloat base) {
 - (CGRect)textLabelFrame
 {
     static const CGFloat horizontalMargin = 2;
+    static const CGFloat verticalMargin = 2;
+    
     CGSize maxLabelSize = CGSizeMake(CGRectGetWidth(self.bounds) - horizontalMargin * 2, CGRectGetHeight(self.bounds));
     
 //    NSDictionary *attrs = @{ NSFontAttributeName: _textLabel.font };
@@ -153,10 +155,10 @@ CGFloat roundOnBase(CGFloat x, CGFloat base) {
     
     CGSize textSize = [_textLabel sizeThatFits:maxLabelSize];
     
-    textSize.height = MIN(textSize.height, CGRectGetHeight(self.bounds) - 35);
+    textSize.height = MIN(textSize.height, CGRectGetHeight(self.bounds) - 35 - (verticalMargin * 2));
     
     return CGRectMake(horizontalMargin,
-                      CGRectGetHeight(self.bounds) - textSize.height,
+                      CGRectGetHeight(self.bounds) - textSize.height - verticalMargin,
                       textSize.width,
                       textSize.height);
 }
@@ -265,6 +267,7 @@ CGFloat roundOnBase(CGFloat x, CGFloat base) {
     self.overlayImageView.hidden = !self.isHighlighted || self.isNotThisMonth || self.isOutOfRange;
     self.markImageView.hidden = !self.isMarked || self.isNotThisMonth || self.isOutOfRange;
     self.dividerImageView.hidden = self.isNotThisMonth;
+    self.textLabel.hidden = self.isNotThisMonth;
 
     if (self.isNotThisMonth) {
         self.dateLabel.textColor = [self notThisMonthLabelTextColor];
