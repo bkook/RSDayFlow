@@ -266,6 +266,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable UIImage *)customDividerImage;
 
+/**
+ Default selection bubble rectangle.
+ 
+ @discussion Can be overridden in subclasses for customization.
+ */
 - (CGRect)selectedImageViewFrame;
 
 - (void)configureTextLabel:(UILabel *)label;
