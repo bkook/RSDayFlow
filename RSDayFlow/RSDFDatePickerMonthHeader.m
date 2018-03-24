@@ -81,8 +81,10 @@
     _currentMonth = currentMonth;
     if (!_currentMonth) {
         self.dateLabel.textColor = [self monthLabelTextColor];
+        self.dateLabel.font = [self monthLabelFont];
     } else {
         self.dateLabel.textColor = [self currentMonthLabelTextColor];
+        self.dateLabel.font = [self currentMonthLabelFont];
     }
 }
 
@@ -108,6 +110,11 @@
 #pragma mark - Attributes of Subviews
 
 - (UIFont *)monthLabelFont
+{
+    return [UIFont fontWithName:@"HelveticaNeue" size:16.0f];
+}
+
+- (UIFont *)currentMonthLabelFont
 {
     return [UIFont fontWithName:@"HelveticaNeue" size:16.0f];
 }

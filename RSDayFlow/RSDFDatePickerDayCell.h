@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly, strong) UILabel *dateLabel;
 
+@property (nonatomic, readonly, strong) UILabel *textLabel;
+
 ///--------------------------------------
 /// @name Accessing Attributes of the Day
 ///--------------------------------------
@@ -270,6 +272,8 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion Can be overridden in subclasses for customization.
  */
 - (CGRect)selectedImageViewFrame;
+
+- (void)configureTextLabel:(UILabel *)label;
 
 @end
 
